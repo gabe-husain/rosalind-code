@@ -12,8 +12,12 @@ use std::fs;
 //Problem 3
 //use solutions::REVC::{complement};
 //Problem 4
-use std::collections::HashMap;
-use solutions::GC::{GC};
+//use std::collections::HashMap;
+//use solutions::GC::{GC};
+//Problem 5
+use solutions::SUBS::{SUBS};
+// Problem 6
+
 
 fn main() {
     // some file handling
@@ -23,8 +27,6 @@ fn main() {
         .expect("Should have been able to read the file");
 
 
-    let gc_dict: HashMap<String, f32> = GC(&contents);
-    for (key, value) in gc_dict.iter() {
-        println!("{} \n{}", key, value);
-    }
+    let positions: Vec<usize> = SUBS(&contents);
+    println!("{}", positions.iter().map(|x| x.to_string()).collect::<Vec<String>>().join(" "));
 }
