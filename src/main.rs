@@ -1,45 +1,12 @@
-//Counting DNA Nucleotides
+
+mod solutions;
+use solutions::DNA::{count_nucleotide, count_nucleotide_onepass};
+
 
 fn main() {
-
-    let string = "CGAATTCATACCCGGATGCCTTCTCGGTGGTCTGCCCCTGATGCTTCAGATTCACAACAGACCGCAGAGTGAGGCGCGCGTAGCTCAAATTATCACTTGCTCAGGCGCCGGTTGAGCGCAGCATTGGCCCACTCCAACTAGAAGGCAGCCACATCCGGGAAACACCCCTCTTGGTTTTCCTGGAAAAAATTCGAGGACACCCGATTGGAACACGATTATTAGAGGAAGTTAGTTGTGGACAGTCCTCAGCAAGTACGTTAGATCAGCGATACGAGTTACTTTATAAATCGTCATACTATAACGGACACGGAGCGCAGCCCCCGTGGTACGTTAATTACGCTTCTAGCTTAAGGATTAGATTCGGTAGTCCCCGCAGAGTGACGAATTTGGATAAGAGAGAACGAGACCGTAGTCGCGTACTTTGTAGCGGCCCGACATATCGCCAGGTGACTGCAGCCGCCGGATACTGCGCGGGGACTGTCGTCCCTTTGCACTGGCACGCATTTAGCGCCAAGGAAATTAACAGATATAGCCTTCAAAACCAATGAGTCAAAGAAGGCTCAAGTCCGCAAGCATAGGAACTCCTTGGAAAGCTGAATTCTCCCGTAGTCAAGTTCCACAAAGGTGCACCAATTGGAGAGGAGCAGTCTCATAGAGATCTACTGGGCTATAAAGGAAATGTGTCTACTGAGCAGCAACCCGTGGCCGGCTCTAATATTGGCGATAGAGTGTACGAGATGTTATGGCGGACAATTGCCATCGGATCTAAGGAACAGGAAGGCACATATAAGCCGTAGCTGTGTTAATGATACTCCATCTTCAACTACCCACAACGGTTACTATCTCTTACAGACCATATGAGGGACCGCAGCACTTCGAACGAGCCCCTATAGTTGACGCTGCAAAGGTGATCCTAGGTCTTCAGGGCTTTTAGAACCC";
-    let counts = count_nucleotide_onepass(string);
-    println!("{} {} {} {}", counts[0], counts[1], counts[2], counts[3]);
-    
+    let dna = "AGCTTTTCATTCTGACTGCAACGGGCAATATGTCTCTGTGTGGATTAAAAAAAGAGTGTCTGATAGCAGC";
+    let sol1 = count_nucleotide(dna);
+    let sol2 = count_nucleotide_onepass(dna);
+    println!("{} {} {} {}", sol1[0], sol1[1], sol1[2], sol1[3]);
+    println!("{} {} {} {}", sol2[0], sol2[1], sol2[2], sol2[3]);
 }
-
-// For Problem 1
-
-// Other solutions
-
-fn count_nucleotide_onepass(s: &str) -> [i32; 4] {
-    let mut counts: [i32; 4] = [0, 0, 0, 0]; 
-    for nucleotide in s.chars() {
-        match nucleotide {
-	    'A' => counts[0] += 1,
-	    'C' => counts[1] += 1,
-            'G' => counts[2] += 1,
-            'T' => counts[3] += 1,
-	    _ => (),
-        }
-    }
-    counts
-}
-
-// I wanted to write this in a way that can be easily parallelized in the future, 
-// for example with a larger dataset that might begin to be more important
-
-fn count_nucleotide(s: &str) -> [i32; 4] {
-    let mut counts: [i32;4] = [0, 0, 0, 0];
-    counts[0] = s.chars().filter(|c| *c == 'A').count() as i32;
-    counts[1] = s.chars().filter(|c| *c == 'C').count() as i32;
-    counts[2] = s.chars().filter(|c| *c == 'G').count() as i32;
-    counts[3] = s.chars().filter(|c| *c == 'T').count() as i32;
-    counts
-}
-
-// Main Code for Problem 1
-
-//    let string = "CAAAACATTGCTGGTAAGCAAAAGAAAGGGATCCTCACGTATGATCATGACATGGGGAATATGGGGTATTCCCCGTTTTTT$
-//    let counts = count_nucleotide(string);
-//    println!("{} {} {} {}", counts[0], counts[1], counts[2], counts[3]);
